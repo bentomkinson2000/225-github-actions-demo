@@ -1,18 +1,25 @@
-name: Node Continuous Integration
+name: Node continouse Integration
 
-on:
+on: 
   pull_request:
-    branches: [ master ]
+  branches: [master]
+  
+  #what jobs you want to run
+  jobs:
+    #name
+    test_pull_request:
+    #what environment to run on
+    runs-on: windows-lastest
 
-
-jobs:
-  test_pull_request:
-    runs-on: ubuntu-latest
     steps:
+      #this action brings your source code into the current working directory
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+        #this sets up node js in order to run these commands
+      - uses: 
+        #specify version
         with:
-          node-version: 12
+          node_versions: 12
+        #equivalent to npm install, does a clean install for your CI server
       - run: npm ci
       - run: npm test
       - run: npm run build
